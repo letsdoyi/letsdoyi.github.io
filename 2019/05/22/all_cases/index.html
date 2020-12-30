@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>m개 중 n개를 선택하여 만들 수 있는 모든 경우의 수 - Blog</title>
+
+
+    <meta name="description" content="이 알고리즘을 생각하게 된 이유알고리즘 문제를 풀다보면, 배열의 요소들 중에서 몇 개를 선택하여 배열을 만드는 알로리즘을 짤 수 있다면 문제를 효율적이고 쉽게 풀 수 있다는 생각이 들었고 이 알고리즘을 생각하게 되었다. 인터넷에서 n개를 선택하여 만들 수 있는 모든 경우의 수를 추출하는 알고리즘을 찾아보았지만, 잘 이해가 되지않아 직접 만들어보게 되었다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="m개 중 n개를 선택하여 만들 수 있는 모든 경우의 수">
+<meta property="og:url" content="http://yoursite.com/2019/05/22/all_cases/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="이 알고리즘을 생각하게 된 이유알고리즘 문제를 풀다보면, 배열의 요소들 중에서 몇 개를 선택하여 배열을 만드는 알로리즘을 짤 수 있다면 문제를 효율적이고 쉽게 풀 수 있다는 생각이 들었고 이 알고리즘을 생각하게 되었다. 인터넷에서 n개를 선택하여 만들 수 있는 모든 경우의 수를 추출하는 알고리즘을 찾아보았지만, 잘 이해가 되지않아 직접 만들어보게 되었다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="article:published_time" content="2019-05-22T10:54:35.000Z">
+<meta property="article:modified_time" content="2020-03-23T08:01:59.776Z">
+<meta property="article:author" content="Doyi Kim">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="m개 중 n개를 선택하여 만들 수 있는 모든 경우의 수" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/letsdoyi">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-22T10:54:35.000Z">2019-05-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Algorithm/">Algorithm</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 minutes read (About 907 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                m개 중 n개를 선택하여 만들 수 있는 모든 경우의 수
+            
+        </h1>
+        <div class="content">
+            <h2 id="이-알고리즘을-생각하게-된-이유"><a href="#이-알고리즘을-생각하게-된-이유" class="headerlink" title="이 알고리즘을 생각하게 된 이유"></a>이 알고리즘을 생각하게 된 이유</h2><p>알고리즘 문제를 풀다보면, 배열의 요소들 중에서 몇 개를 선택하여 배열을 만드는 알로리즘을 짤 수 있다면 문제를 효율적이고 쉽게 풀 수 있다는 생각이 들었고 이 알고리즘을 생각하게 되었다. 인터넷에서 n개를 선택하여 만들 수 있는 모든 경우의 수를 추출하는 알고리즘을 찾아보았지만, 잘 이해가 되지않아 직접 만들어보게 되었다.</p>
+<a id="more"></a>
+
+<h2 id="컨셉"><a href="#컨셉" class="headerlink" title="컨셉"></a>컨셉</h2><p><strong>이진법의 On, Off</strong> 의 개념과 <strong>수의 연속성</strong>을 활용하였다. 배열의 요소들 중 포함한 요소를 1 (On) , 포함하지 않는 요소를 0 (Off) 이라고 표현한다. 예를 들어, 요소의 수가 3인 배열 [1, 2, 3] 중 2개의 요소로 만들 수 있는 배열은 이진법으로 110, 101, 011 이렇게 3가지 이다. 또한 이 방법은 수의 연속성을 활용하여 모든 경우를 빠짐없이 추출할 수 있다. 바로 앞 문장에서 나왔던 예시로 생각해보면, 1부터 7 (&lt; 2의 3제곱수) 수를 이진법으로 표현한 뒤 1이 2번 들어가는 수를 추출하면 된다.</p>
+<h2 id="장점"><a href="#장점" class="headerlink" title="장점"></a>장점</h2><p>이 방법은 배열의 요소의 수와 n의 수에 상관이 없고 빠짐없이 모든 경우의 수를 추출할 수 있다.</p>
+<h2 id="코드-구현-시-고려-사항들"><a href="#코드-구현-시-고려-사항들" class="headerlink" title="코드 구현 시 고려 사항들"></a>코드 구현 시 고려 사항들</h2><ol>
+<li><p>011은 처럼, 자리수를 모두 표현 해주기 위해 앞에 1을 붙인 수(2의 원하는 자리수 제곱)부터 범위를 시작한다. (이 의미없는 1은 나중에 제거한다)</p>
+</li>
+<li><p>원하는 n만큼 1이 들어가 있다면 추출한다.</p>
+</li>
+<li><p>1이 들어간 인덱스를 원래 배열의 인덱스로 사용해 원하는 요소가 들어간 배열을 만든다.</p>
+</li>
+</ol>
+<h2 id="이-알고리즘을-활용해-푼-문제"><a href="#이-알고리즘을-활용해-푼-문제" class="headerlink" title="이 알고리즘을 활용해 푼 문제"></a>이 알고리즘을 활용해 푼 문제</h2><p>John and Mary want to travel between a few towns A, B, C … Mary has on a sheet of paper a list of distances between these towns. <code>ls = [50, 55, 57, 58, 60]</code>. John is tired of driving and he says to Mary that he doesn’t want to drive more than <code>t = 174 miles</code> and he will visit only <code>3</code> towns.</p>
+<p>Which distances, hence which towns, they will choose so that the sum of the distances is the biggest possible</p>
+<ul>
+<li>to please Mary and John- ?</li>
+</ul>
+<p>Example:</p>
+<p>With list <code>ls</code> and 3 towns to visit they can make a choice between: <code>[50,55,57],[50,55,58],[50,55,60],[50,57,58],[50,57,60],[50,58,60],[55,57,58],[55,57,60],[55,58,60],[57,58,60]</code>.</p>
+<p>The sums of distances are then: <code>162, 163, 165, 165, 167, 168, 170, 172, 173, 175</code>.</p>
+<p>The biggest possible sum taking a limit of <code>174</code> into account is then <code>173</code> and the distances of the <code>3</code> corresponding towns is <code>[55, 58, 60]</code>.</p>
+<p>The function <code>chooseBestSum</code> (or <code>choose_best_sum</code> or … depending on the language) will take as parameters <code>t</code> (maximum sum of distances, integer &gt;= 0), <code>k</code> (number of towns to visit, k &gt;= 1) and <code>ls</code> (list of distances, all distances are positive or null integers and this list has at least one element). The function returns the “best” sum ie the biggest possible sum of <code>k</code> distances less than or equal to the given limit <code>t</code>, if that sum exists, or otherwise nil, null, None, Nothing, depending on the language. With C++, C, Rust, Swift, Go, Kotlin return <code>-1</code>.</p>
+<p>Examples:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ts = [<span class="number">50</span>, <span class="number">55</span>, <span class="number">56</span>, <span class="number">57</span>, <span class="number">58</span>]<span class="string">` `</span>choose_best_sum(<span class="number">163</span>, <span class="number">3</span>, ts) -&gt; <span class="number">163</span></span><br><span class="line">xs = [<span class="number">50</span>]<span class="string">` `</span>choose_best_sum(<span class="number">163</span>, <span class="number">3</span>, xs) -&gt; nil (or <span class="literal">null</span> or ... or <span class="number">-1</span> (C++, C, Rust, Swift, Go)</span><br><span class="line">ys = [<span class="number">91</span>, <span class="number">74</span>, <span class="number">73</span>, <span class="number">85</span>, <span class="number">73</span>, <span class="number">81</span>, <span class="number">87</span>]<span class="string">` `</span>choose_best_sum(<span class="number">230</span>, <span class="number">3</span>, ys) -&gt; <span class="number">228</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="코드-구현"><a href="#코드-구현" class="headerlink" title="코드 구현"></a>코드 구현</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">chooseBestSum</span>(<span class="params">t, k, ls</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (ls.length &lt; k) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  <span class="comment">//seleted</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> bArr = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">  <span class="keyword">var</span> allCase = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">  <span class="keyword">var</span> sumArr = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">  <span class="comment">//FROM pow(2, ls.length)  TO Math.pow(2, ls.length + 1)</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (</span><br><span class="line">    <span class="keyword">var</span> a = <span class="built_in">Math</span>.pow(<span class="number">2</span>, ls.length), i = <span class="number">0</span>;</span><br><span class="line">    a &lt; <span class="built_in">Math</span>.pow(<span class="number">2</span>, ls.length + <span class="number">1</span>);</span><br><span class="line">    a++, i++</span><br><span class="line">  ) &#123;</span><br><span class="line">    <span class="keyword">var</span> b = a;</span><br><span class="line">    <span class="keyword">for</span> (bArr[i] = []; b &gt;= <span class="number">1</span>; ) &#123;</span><br><span class="line">      bArr[i].unshift(b % <span class="number">2</span>);</span><br><span class="line">      b = <span class="built_in">Math</span>.floor(b / <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="comment">//2D array by Binary Method</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; bArr.length; i++) &#123;</span><br><span class="line">    bArr[i].shift();</span><br><span class="line">    allCase[i] = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; bArr[i].length; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (bArr[i][j] === <span class="number">1</span>) &#123;</span><br><span class="line">        allCase[i].push(ls[j]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="comment">//all cases array</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; allCase.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (allCase[i].length === k) &#123;</span><br><span class="line">      <span class="keyword">var</span> sum = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; allCase[i].length; j++) &#123;</span><br><span class="line">        sum = sum + allCase[i][j];</span><br><span class="line">      &#125;</span><br><span class="line">      sumArr.push(sum);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sumArr.push(t);</span><br><span class="line">  sumArr.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a - b;</span><br><span class="line">  &#125;); <span class="comment">//sorted the array in ascending order</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (sumArr[sumArr.indexOf(t) + <span class="number">1</span>] === t) &#123;</span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sumArr[sumArr.indexOf(t) + <span class="number">1</span>] &gt; t &amp;&amp; sumArr.indexOf(t) === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> sumArr[sumArr.indexOf(t) - <span class="number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/05/27/Object-Constructor/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Object Constructor - 생성자로 객체 만들기</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/08/find-odd-int/">
+                <span class="level-item">홀수번 나타나는 정수 찾기</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right is-sticky">
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-13T10:30:48.112Z">2020-09-13</time></div>
+                    <a href="/2020/09/13/why-typescript/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Why Typescript?</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Paradigm/">Paradigm</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-13T09:37:25.963Z">2020-09-13</time></div>
+                    <a href="/2020/09/13/npm/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Module Dependency</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/ETC/">ETC</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-30T14:17:43.782Z">2020-08-30</time></div>
+                    <a href="/2020/08/30/design-patterns-intro/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Software Design Patterns - Intro</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Software-Engineering/">Software Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-30T01:56:49.782Z">2020-08-30</time></div>
+                    <a href="/2020/08/30/cooperative-learning/" class="title has-link-black-ter is-size-6 has-text-weight-normal">함께 자라기, 애자일로 가는 길 - 김창준</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Books/">Books</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-29T11:31:14.885Z">2020-08-29</time></div>
+                    <a href="/2020/08/29/circular-progress-bar-implement-2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SVG로 그림 그리는 효과 구현 - 2탄</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Playground/">Playground</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Books/">
+            <span class="level-start">
+                <span class="level-item">Books</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Playground/">
+            <span class="level-start">
+                <span class="level-item">Playground</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/DOM/">
+            <span class="level-start">
+                <span class="level-item">DOM</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/ETC/">
+            <span class="level-start">
+                <span class="level-item">ETC</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Javascript/">
+            <span class="level-start">
+                <span class="level-item">Javascript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Paradigm/">
+            <span class="level-start">
+                <span class="level-item">Paradigm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Software-Engineering/">
+            <span class="level-start">
+                <span class="level-item">Software Engineering</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Thoughts/">
+            <span class="level-start">
+                <span class="level-item">Thoughts</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Tool/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Algorithm/">
+                        <span class="tag">Algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Array/">
+                        <span class="tag">Array</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CleverSolution/">
+                        <span class="tag">CleverSolution</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Delete/">
+                        <span class="tag">Delete</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Javascript/">
+                        <span class="tag">Javascript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/apply/">
+                        <span class="tag">apply</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/arguments/">
+                        <span class="tag">arguments</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/behavior-delegation/">
+                        <span class="tag">behavior delegation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bind/">
+                        <span class="tag">bind</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/call/">
+                        <span class="tag">call</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/constructor/">
+                        <span class="tag">constructor</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/context/">
+                        <span class="tag">context</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dunder-proto/">
+                        <span class="tag">dunder proto</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/if/">
+                        <span class="tag">if( )</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/index/">
+                        <span class="tag">index( )</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/indexOf/">
+                        <span class="tag">indexOf()</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/instance/">
+                        <span class="tag">instance</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/javascript/">
+                        <span class="tag">javascript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/job-interview-question/">
+                        <span class="tag">job interview question</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/new/">
+                        <span class="tag">new</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/node/">
+                        <span class="tag">node</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/object/">
+                        <span class="tag">object</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/prototype/">
+                        <span class="tag">prototype</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/slice/">
+                        <span class="tag">slice()</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/splice/">
+                        <span class="tag">splice()</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/this/">
+                        <span class="tag">this</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EC%98%A4%EB%8B%B5%EB%85%B8%ED%8A%B8/">
+                        <span class="tag">오답노트</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="m개 중 n개를 선택하여 만들 수 있는 모든 경우의 수" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Doyi Kim&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/letsdoyi">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://yoursite.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

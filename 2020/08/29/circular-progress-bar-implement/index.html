@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>SVG로 그림 그리는 효과 구현 - 1탄 - Blog</title>
+
+
+    <meta name="description" content="Circular Progress Bar를 구현하는 방법에 대해 정리해보려고 합니다.Apple Watch activat ring, Donot 그래프, iPhone Timer, 음악앱에서 많이 보이는 재생시간 progress bar 등의 많은 곳에서 사용되고 있습니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVG로 그림 그리는 효과 구현 - 1탄">
+<meta property="og:url" content="http://yoursite.com/2020/08/29/circular-progress-bar-implement/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="Circular Progress Bar를 구현하는 방법에 대해 정리해보려고 합니다.Apple Watch activat ring, Donot 그래프, iPhone Timer, 음악앱에서 많이 보이는 재생시간 progress bar 등의 많은 곳에서 사용되고 있습니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="article:published_time" content="2020-08-28T16:10:24.803Z">
+<meta property="article:modified_time" content="2020-12-30T09:25:51.550Z">
+<meta property="article:author" content="Doyi Kim">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="SVG로 그림 그리는 효과 구현 - 1탄" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/letsdoyi">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-08-28T16:10:24.803Z">2020-08-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Playground/">Playground</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 minutes read (About 1086 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                SVG로 그림 그리는 효과 구현 - 1탄
+            
+        </h1>
+        <div class="content">
+            <p>Circular Progress Bar를 구현하는 방법에 대해 정리해보려고 합니다.<br>Apple Watch activat ring, Donot 그래프, iPhone Timer, 음악앱에서 많이 보이는 재생시간 progress bar 등의 많은 곳에서 사용되고 있습니다.</p>
+<p><img src="/2020/08/29/circular-progress-bar-implement/watch_activity_rings.png" alt="https://www.apple.com/watch/close-your-rings/" title="apple watch ring"></p>
+<a id="more"></a>
+
+<p>여러가지 방식이 있겠지만, 제가 찾은 가장 단순한 방식은 SVG를 이용해서 구현하는 것이였고, 그 방식에 대해 정리해보겠습니다.</p>
+<h3 id="원리는-간단합니다"><a href="#원리는-간단합니다" class="headerlink" title="원리는 간단합니다."></a>원리는 간단합니다.</h3><p>SVG의 <code>path</code>를 <code>동그란 모양</code>으로 으로 <code>그려주면(그려주는 효과를 내면)</code> 됩니다.</p>
+<h3 id="먼저-직선을-그리는-효과-및-구현을-간단히-정리해보겠습니다"><a href="#먼저-직선을-그리는-효과-및-구현을-간단히-정리해보겠습니다" class="headerlink" title="먼저, 직선을 그리는 효과 및 구현을 간단히 정리해보겠습니다."></a>먼저, 직선을 그리는 효과 및 구현을 간단히 정리해보겠습니다.</h3><p>SVG의 path의 stroke 기능을 이용할 수 있습니다.<br>stroke의 점선 간격을 조절하여(정확하게는 점선의 실선부분의 위치를 조절하여) 구현할 수 있습니다.</p>
+<p>점선 A(1000px 실선, 1000px 빈선(?) 1000px 실선, 1000px 빈선(?))을 상상해봅니다.<br>추가로 눈에 보이는 path 길이는 1000px로 정해져 있다고 상상합니다.<br>마치 1000px 가로 길이의 상자에 들어가 있다고 말입니다.<br>그 상자 안에는 거대한 점선 A가 천천히 왼쪽에서 오른쪽으로 움직입니다.<br>우리가 보는 관점에서는 선이 오른쪽에서 왼쪽으로 그려지는 것처럼 보여질 것입니다.</p>
+<p>머릿속으로 코드를 구현해 봅니다.</p>
+<ul>
+<li><p>시작점 설정: 실선 부분의 시작 위치가 1000px (1000px 가로 길이의 상자에서는 아무것도 없는 것처럼 보임)</p>
+</li>
+<li><p>끝점 설정: 실선 부분의 시작 위치가 0px (0px 가초 길이의 상자에서는 1000px의 실선의 전체가 보임)</p>
+</li>
+<li><p>이 둘 연결을 애니메이션 으로 연결하면 되겠네. from(아무것도 보이지 않음), to(실선이 모두 채워진 상태)<br><code>keyframes</code> 이 <strong>알아서</strong> 중간 frame 들을 연결 시켜줌 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes">https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes</a><br><img src="/2020/08/29/circular-progress-bar-implement/path_stroke_description.png" alt="" title="imagine path stroke"></p>
+</li>
+</ul>
+<p>그럼 실제 코드로 정리해보겠습니다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">class</span>=<span class="string">"svg-box"</span>&gt;</span><span class="tag">&lt;<span class="name">path</span> <span class="attr">class</span>"<span class="attr">path</span>" <span class="attr">d</span>=<span class="string">"M0,200,L1000,200 "</span>/&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span> //시작점</span><br><span class="line">(좌표처럼 생각) 0px, 200px //끝점 1000px, 200px</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.svg</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">1000px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  //viewBox로도 설정할 수 있습니다.</span><br><span class="line">  <span class="selector-tag">background-color</span>: <span class="selector-tag">red</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.path</span> &#123;</span><br><span class="line">  <span class="attribute">stroke</span>: black;</span><br><span class="line">  <span class="attribute">stroke-width</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">stroke-dasharray</span>: <span class="number">1000px</span>;</span><br><span class="line">  //dasharray로 실선과 빈선을 모두 지정할 수 있습니다.</span><br><span class="line">  //- value 가 하나인 경우, (e.g) stroke-dasharray: 50px, 50px짜리 실선과 빈선으로 이루어진 점선</span><br><span class="line">  //- value 가 두개인 경우, (e.g) stroke-dasharray: 50px, 10px, 50px짜리 실선과 10px 짜리 빈선으로 이루어진 점선</span><br><span class="line">  <span class="selector-tag">animation</span>: <span class="selector-tag">draw</span> 3<span class="selector-tag">s</span> <span class="selector-tag">infinite</span>;</span><br><span class="line">  <span class="selector-tag">animarion-timing-function</span>: <span class="selector-tag">linear</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> draw &#123;</span><br><span class="line">  <span class="selector-tag">from</span> &#123;</span><br><span class="line">    <span class="attribute">stroke-dashoffset</span>: <span class="number">1000px</span>;</span><br><span class="line">    //점선 전체의 시작점을 설정합니다. 이 경우에는 "오른쪽으로"으로 "1000px 이동" 한 곳이 "전체 점선의 시작점" 입니다.</span><br><span class="line">    //"dashoffset" 는 빈선이 아닌, 실선의 시작점(전체 점선의 시작점)을 의미합니다.</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  //중간의 일어나는 frame들은 keyframes이 알아서 만들고 컨트롤 합니다.</span><br><span class="line"></span><br><span class="line">  <span class="selector-tag">to</span> &#123;</span><br><span class="line">    <span class="attribute">stroke-dashoffset</span>: <span class="number">0px</span>;</span><br><span class="line">    //점선 전체의 시작점이 0px으로 설정</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>다음은 위의 값을 실행시킨 것 입니다.<br><a href="https://codepen.io/letsdoyi/pen/ZEWybya">https://codepen.io/letsdoyi/pen/ZEWybya</a></p>
+<p>제가 헷갈렸던 부분은</p>
+<ol>
+<li>dashoffset의 의미를 이해하는 것</li>
+<li>keyframes 이 중간 frame 들을 연결 시켜주는 원리를 도입 하는 것<br>이였습니다.</li>
+</ol>
+<p>처음에는 전체의 시작점이 1000px ~ 0px로 이동한다고 생각하여 선의 움직임을 반대로 예상하였습니다.</p>
+<h3 id="그렇다면-마지막으로-선을-그리듯한-효과는-어떻게-내는-것인지-정리-해보겠습니다"><a href="#그렇다면-마지막으로-선을-그리듯한-효과는-어떻게-내는-것인지-정리-해보겠습니다" class="headerlink" title="그렇다면, 마지막으로 선을 그리듯한 효과는 어떻게 내는 것인지 정리 해보겠습니다."></a>그렇다면, 마지막으로 선을 그리듯한 효과는 어떻게 내는 것인지 정리 해보겠습니다.</h3><ol>
+<li>path stroke 이용</li>
+<li>stroke-dasharray 이 <code>path 길이</code>와 같도록 설정</li>
+<li>stroke-dashoffset(시작점 설정)를 <code>path 길이</code>와 0으로 설정하여 애니메이션 대입</li>
+</ol>
+<p>참고로, path 길이는 DOM의 getTotalLength라는 메서드를 이용할 수 있습니다.<br><code>path 길이</code> 측정은 {SVGPathElement}.getTotalLength() 이 값을 이용</p>
+<p>다음은 직선이 아닌 <code>곡선을 그리는 듯한 느낌</code>을 주는 코드입니다.<br><a href="https://codepen.io/letsdoyi/pen/XWdgRXm">https://codepen.io/letsdoyi/pen/XWdgRXm</a></p>
+<h3 id="2편에서는-circular-progres-bar-구현-svg-만드는-법-에-대해-정리해-보겠습니다"><a href="#2편에서는-circular-progres-bar-구현-svg-만드는-법-에-대해-정리해-보겠습니다" class="headerlink" title="2편에서는 circular progres bar 구현(+ svg 만드는 법)에 대해 정리해 보겠습니다."></a>2편에서는 circular progres bar 구현(+ svg 만드는 법)에 대해 정리해 보겠습니다.</h3>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/08/29/circular-progress-bar-implement-2/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">SVG로 그림 그리는 효과 구현 - 2탄</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/08/29/Books-intro/">
+                <span class="level-item">Intro</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right is-sticky">
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-13T10:30:48.112Z">2020-09-13</time></div>
+                    <a href="/2020/09/13/why-typescript/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Why Typescript?</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Paradigm/">Paradigm</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-13T09:37:25.963Z">2020-09-13</time></div>
+                    <a href="/2020/09/13/npm/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Module Dependency</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/ETC/">ETC</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-30T14:17:43.782Z">2020-08-30</time></div>
+                    <a href="/2020/08/30/design-patterns-intro/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Software Design Patterns - Intro</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Software-Engineering/">Software Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-30T01:56:49.782Z">2020-08-30</time></div>
+                    <a href="/2020/08/30/cooperative-learning/" class="title has-link-black-ter is-size-6 has-text-weight-normal">함께 자라기, 애자일로 가는 길 - 김창준</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Books/">Books</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-29T11:31:14.885Z">2020-08-29</time></div>
+                    <a href="/2020/08/29/circular-progress-bar-implement-2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SVG로 그림 그리는 효과 구현 - 2탄</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Playground/">Playground</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Books/">
+            <span class="level-start">
+                <span class="level-item">Books</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Playground/">
+            <span class="level-start">
+                <span class="level-item">Playground</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/DOM/">
+            <span class="level-start">
+                <span class="level-item">DOM</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/ETC/">
+            <span class="level-start">
+                <span class="level-item">ETC</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Javascript/">
+            <span class="level-start">
+                <span class="level-item">Javascript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Paradigm/">
+            <span class="level-start">
+                <span class="level-item">Paradigm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Software-Engineering/">
+            <span class="level-start">
+                <span class="level-item">Software Engineering</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Thoughts/">
+            <span class="level-start">
+                <span class="level-item">Thoughts</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Tool/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Algorithm/">
+                        <span class="tag">Algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Array/">
+                        <span class="tag">Array</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CleverSolution/">
+                        <span class="tag">CleverSolution</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Delete/">
+                        <span class="tag">Delete</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Javascript/">
+                        <span class="tag">Javascript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/apply/">
+                        <span class="tag">apply</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/arguments/">
+                        <span class="tag">arguments</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/behavior-delegation/">
+                        <span class="tag">behavior delegation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bind/">
+                        <span class="tag">bind</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/call/">
+                        <span class="tag">call</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/constructor/">
+                        <span class="tag">constructor</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/context/">
+                        <span class="tag">context</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dunder-proto/">
+                        <span class="tag">dunder proto</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/if/">
+                        <span class="tag">if( )</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/index/">
+                        <span class="tag">index( )</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/indexOf/">
+                        <span class="tag">indexOf()</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/instance/">
+                        <span class="tag">instance</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/javascript/">
+                        <span class="tag">javascript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/job-interview-question/">
+                        <span class="tag">job interview question</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/new/">
+                        <span class="tag">new</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/node/">
+                        <span class="tag">node</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/object/">
+                        <span class="tag">object</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/prototype/">
+                        <span class="tag">prototype</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/slice/">
+                        <span class="tag">slice()</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/splice/">
+                        <span class="tag">splice()</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/this/">
+                        <span class="tag">this</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EC%98%A4%EB%8B%B5%EB%85%B8%ED%8A%B8/">
+                        <span class="tag">오답노트</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="SVG로 그림 그리는 효과 구현 - 1탄" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Doyi Kim&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/letsdoyi">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://yoursite.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

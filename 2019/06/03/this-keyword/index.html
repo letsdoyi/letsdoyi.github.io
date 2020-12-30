@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.2.1" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>this keyword - Blog</title>
+
+
+    <meta name="description" content="this가 객체를 가리킨다 하지만, 어떤 객체를 가리키는지는 this를 사용하는 해당 함수를 “어떤 방식으로 호출하느냐” 에 따라 결정된다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="this keyword">
+<meta property="og:url" content="http://yoursite.com/2019/06/03/this-keyword/index.html">
+<meta property="og:site_name" content="Blog">
+<meta property="og:description" content="this가 객체를 가리킨다 하지만, 어떤 객체를 가리키는지는 this를 사용하는 해당 함수를 “어떤 방식으로 호출하느냐” 에 따라 결정된다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="article:published_time" content="2019-06-03T06:14:35.000Z">
+<meta property="article:modified_time" content="2020-03-24T13:53:36.760Z">
+<meta property="article:author" content="Doyi Kim">
+<meta property="article:tag" content="job interview question">
+<meta property="article:tag" content="this">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="오답노트">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="this keyword" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/letsdoyi">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-03T06:14:35.000Z">2019-06-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Javascript/">Javascript</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 minutes read (About 989 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                this keyword
+            
+        </h1>
+        <div class="content">
+            <p><code>this</code>가 객체를 가리킨다 하지만, 어떤 객체를 가리키는지는 <code>this</code>를 사용하는 해당 함수를 <strong>“어떤 방식으로 호출하느냐”</strong> 에 따라 결정된다.</p>
+<a id="more"></a>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"bow-wow"</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">"ken"</span>,</span><br><span class="line">  log: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">obj.log(); <span class="comment">// 'ken'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fn = obj.log;</span><br><span class="line">fn(); <span class="comment">// 'bow-wow'</span></span><br></pre></td></tr></table></figure>
+
+<p><code>this</code> 를 사용하는 해당 함수를 호출하는 방식에는 4가지가 있다.</p>
+<h2 id="1-Regular-function-call-일반-함수-실행-방식"><a href="#1-Regular-function-call-일반-함수-실행-방식" class="headerlink" title="1. Regular function call - 일반 함수 실행 방식"></a>1. Regular function call - 일반 함수 실행 방식</h2><h3 id="1-1-in-non-strict-mode"><a href="#1-1-in-non-strict-mode" class="headerlink" title="1-1. in non-strict mode"></a>1-1. in non-strict mode</h3><p>non-strict mode 에서 일반 함수 실행방식으로 <code>this</code> 를 사용한 함수를 호출했을 경우에 <code>this</code> 를 global object를 가리킨다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"ken"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name); <span class="comment">// 'this' === global object (브라우저상에선 window 객체)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-in-strict-mode-찾아보고-공부하기"><a href="#1-2-in-strict-mode-찾아보고-공부하기" class="headerlink" title="1-2. in strict mode (찾아보고 공부하기)"></a>1-2. in strict mode (찾아보고 공부하기)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">"use strict"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">"ken"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.name); <span class="comment">// 'this' === undefined</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Dot-Notation-점-호출-방식"><a href="#2-Dot-Notation-점-호출-방식" class="headerlink" title="2. Dot Notation - 점 호출 방식"></a>2. Dot Notation - 점 호출 방식</h2><p>Dot notation 방식으로 <code>this</code> 를 사용한 함수를 호출했을 경우에 <code>this</code> 는 점 앞부분의 객체를 가리킨다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ken = &#123;</span><br><span class="line">  age: <span class="number">35</span>,</span><br><span class="line">  foo: <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ken.foo();</span><br></pre></td></tr></table></figure>
+
+<p><code>ken.foo()</code> 가 Dot notation방식으로 실행되었음으로 <code>this.age</code> 의 <code>this</code> 는 ken 객체를 가리킨다. 따라서 <code>console.log</code> 값은 35가 나온다.</p>
+<h2 id="3-Explicit-binding-분명하게-this를-지정하는-방식"><a href="#3-Explicit-binding-분명하게-this를-지정하는-방식" class="headerlink" title="3. Explicit binding - 분명하게 this를 지정하는 방식"></a>3. Explicit binding - 분명하게 <code>this</code>를 지정하는 방식</h2><p><code>Function.prototype.call</code>, <code>Function.prototype.bind</code>, <code>Function.prototype.apply</code></p>
+<h3 id="3-1-call-apply"><a href="#3-1-call-apply" class="headerlink" title="3-1. call, apply"></a>3-1. call, apply</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">100</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> ken = &#123;</span><br><span class="line">  age: <span class="number">35</span>,</span><br><span class="line">  log: foo</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">foo.call(ken);</span><br><span class="line"><span class="comment">//foo 함수는 실행되고, `this`는 첫번째 인자 'ken'으로 지정된다.</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.age);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ken = &#123;</span><br><span class="line">  age: <span class="number">35</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">foo.call(ken, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>); <span class="comment">//35</span></span><br><span class="line">foo.apply(ken, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]); <span class="comment">//35</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="call과-apply-차이점은-면접-질문으로-자주-출제"><a href="#call과-apply-차이점은-면접-질문으로-자주-출제" class="headerlink" title="!! call과 apply 차이점은 면접 질문으로 자주 출제"></a>!! call과 apply 차이점은 면접 질문으로 자주 출제</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>.<span class="title">call</span>(<span class="params">thisArg, arg1, arg2, ...</span>) //<span class="title">thisArg</span>는 필수요소</span></span><br><span class="line"><span class="function"><span class="title">function</span>.<span class="title">apply</span>(<span class="params">thisArg, [argsArray]</span>) //<span class="title">thisArg</span>는 필수요소</span></span><br></pre></td></tr></table></figure>
+
+<p><code>call</code>과 <code>apply</code>는 모두 this 값을 명시해주는 인자를 첫 번째 인자로 가지며 <code>return 값</code>도 this 가 지정된 함수를 호출하는 것으로 동일하다. 하지만, 이 둘의 차이점은 <code>call</code>은 “많은 인자”를 가질 수 있지만, <code>apply</code>는 “최대 2개의 인자”를 갖을 수 있고 “두 번째 인자는 배열”이여야 한다는 것이다.</p>
+<h3 id="3-2-bind"><a href="#3-2-bind" class="headerlink" title="3-2. bind"></a>3-2. bind</h3><p>공부 중/</p>
+<h2 id="4-‘new’-keyword-를-사용해서-실행한-함수"><a href="#4-‘new’-keyword-를-사용해서-실행한-함수" class="headerlink" title="4. ‘new’ keyword 를 사용해서 실행한 함수"></a>4. <a href="https://letsdoyi.github.io/2019/05/27/Object-Constructor/">‘new’ keyword</a> 를 사용해서 실행한 함수</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// this = &#123;&#125;;</span></span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">"ken"</span>;</span><br><span class="line">  <span class="comment">// this = &#123; name: 'ken' &#125;;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// return this;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ken = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(ken);</span><br></pre></td></tr></table></figure>
+
+<p><code>new</code> 연산자를 사용하면 빈 객체가 생기고, <code>this</code> 는 이 객체를 가리킨다.</p>
+<h2 id="틀린-예제-정리"><a href="#틀린-예제-정리" class="headerlink" title="틀린 예제 정리"></a>틀린 예제 정리</h2><h2 id="예제1"><a href="#예제1" class="headerlink" title="예제1."></a>예제1.</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> age = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">const</span> something = &#123;</span><br><span class="line">  age: <span class="number">1</span>,</span><br><span class="line">  speak: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.age); <span class="comment">// ?</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> butler = &#123;</span><br><span class="line">  age: <span class="number">10</span>,</span><br><span class="line">  serve: <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">    cb();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">butler.serve(something.speak);</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-1-정답"><a href="#1-1-정답" class="headerlink" title="1-1. 정답"></a>1-1. 정답</h3><p><code>butler.serve</code> 에서 <code>something.speak</code> 를 일반함수 호출방식으로 <code>cd()</code> 호출하고 있음으로 <code>this</code> 는 global object 를 가리키므로 답은 100 이다.</p>
+<h3 id="1-2-나의-오답-이유"><a href="#1-2-나의-오답-이유" class="headerlink" title="1-2. 나의 오답 이유"></a>1-2. 나의 오답 이유</h3><p>내가 헷갈렸던 부분은 <code>butler.seve</code> 의 인자 부분에 대한 해석이었다. <code>something.speak</code> 를 Dot Notation 방식으로 호출하려 한다면 <code>something.speak()</code> 가 올바르다. <code>something.speak</code> 는 속성에 대한 값을 나타낸다.</p>
+<h2 id="예제2"><a href="#예제2" class="headerlink" title="예제2."></a>예제2.</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">programmer</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.isSmart = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">this</span>.upgrade = <span class="function"><span class="keyword">function</span>(<span class="params">version</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.isSmart = !!version;</span><br><span class="line">    work();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">work</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.isSmart) &#123;</span><br><span class="line">    <span class="built_in">window</span>.alert(<span class="string">"I can do my work! I am smart!"</span>); <span class="comment">// ?</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> programmer = <span class="keyword">new</span> programmer();</span><br><span class="line"><span class="comment">// THINK: What should happen?</span></span><br><span class="line">programmer.upgrade(<span class="number">1.1</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-정답"><a href="#2-1-정답" class="headerlink" title="2-1. 정답"></a>2-1. 정답</h3><p><code>work</code> 함수안의 <code>this</code> 가 어떤 객체를 가리키고 있는 지 묻는 문제이다. <code>work()</code> 는 일반함수 호출방식으로 실행되었음으로 <code>work</code> 함수안의 <code>this</code> 는 global object를 가리킨다. 글로벌 객체에 <code>isSmart</code> 라는 속성은 정의되지 않았음으로, <code>window.alert</code> 는 실행되지 않는다.</p>
+<ol>
+<li><code>programmer.upgrade</code>의 키 값인 함수가 ‘1.1’를 인자를 갖고 실행된다.</li>
+<li><code>upgrade</code> 함수안의 <code>this</code> 는 <code>programmer</code> 를 가리킨다.</li>
+<li><code>programmer</code> 의 속성 <code>isSmart</code> 에 <code>!!1.1</code> 인 <code>true</code> 를 할당한다. (<code>!!version</code> 은 값을 불리언값으로 바꿔주는 역할)</li>
+<li><code>work</code> 함수를 일반호출 방식으로 실행한다.</li>
+<li><code>work</code> 함수안의 <code>this</code>는 글로벌 객체를 가리킴으로 <code>if</code> 조건문을 만족 하지않아 <code>alert</code> 메서드는 실행되지 않는다.</li>
+</ol>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/javascript/" rel="tag">javascript</a>, <a class="has-link-grey -link" href="/tags/job-interview-question/" rel="tag">job interview question</a>, <a class="has-link-grey -link" href="/tags/this/" rel="tag">this</a>, <a class="has-link-grey -link" href="/tags/%EC%98%A4%EB%8B%B5%EB%85%B8%ED%8A%B8/" rel="tag">오답노트</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/06/03/prototype/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Prototype</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/05/27/Object-Constructor/">
+                <span class="level-item">Object Constructor - 생성자로 객체 만들기</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-3 column-right is-sticky">
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-13T10:30:48.112Z">2020-09-13</time></div>
+                    <a href="/2020/09/13/why-typescript/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Why Typescript?</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Paradigm/">Paradigm</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-13T09:37:25.963Z">2020-09-13</time></div>
+                    <a href="/2020/09/13/npm/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Module Dependency</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/ETC/">ETC</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-30T14:17:43.782Z">2020-08-30</time></div>
+                    <a href="/2020/08/30/design-patterns-intro/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Software Design Patterns - Intro</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Software-Engineering/">Software Engineering</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-30T01:56:49.782Z">2020-08-30</time></div>
+                    <a href="/2020/08/30/cooperative-learning/" class="title has-link-black-ter is-size-6 has-text-weight-normal">함께 자라기, 애자일로 가는 길 - 김창준</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Books/">Books</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-29T11:31:14.885Z">2020-08-29</time></div>
+                    <a href="/2020/08/29/circular-progress-bar-implement-2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SVG로 그림 그리는 효과 구현 - 2탄</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Playground/">Playground</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Algorithm/">
+            <span class="level-start">
+                <span class="level-item">Algorithm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Books/">
+            <span class="level-start">
+                <span class="level-item">Books</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Playground/">
+            <span class="level-start">
+                <span class="level-item">Playground</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/">
+            <span class="level-start">
+                <span class="level-item">Programming</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Programming/DOM/">
+            <span class="level-start">
+                <span class="level-item">DOM</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/ETC/">
+            <span class="level-start">
+                <span class="level-item">ETC</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Javascript/">
+            <span class="level-start">
+                <span class="level-item">Javascript</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Paradigm/">
+            <span class="level-start">
+                <span class="level-item">Paradigm</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Programming/Software-Engineering/">
+            <span class="level-start">
+                <span class="level-item">Software Engineering</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Thoughts/">
+            <span class="level-start">
+                <span class="level-item">Thoughts</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Tool/">
+            <span class="level-start">
+                <span class="level-item">Tool</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Tool/Git/">
+            <span class="level-start">
+                <span class="level-item">Git</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Algorithm/">
+                        <span class="tag">Algorithm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Array/">
+                        <span class="tag">Array</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CleverSolution/">
+                        <span class="tag">CleverSolution</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DOM/">
+                        <span class="tag">DOM</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Delete/">
+                        <span class="tag">Delete</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Git/">
+                        <span class="tag">Git</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Javascript/">
+                        <span class="tag">Javascript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/apply/">
+                        <span class="tag">apply</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/arguments/">
+                        <span class="tag">arguments</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/behavior-delegation/">
+                        <span class="tag">behavior delegation</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bind/">
+                        <span class="tag">bind</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/call/">
+                        <span class="tag">call</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/constructor/">
+                        <span class="tag">constructor</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/context/">
+                        <span class="tag">context</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/dunder-proto/">
+                        <span class="tag">dunder proto</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/if/">
+                        <span class="tag">if( )</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/index/">
+                        <span class="tag">index( )</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/indexOf/">
+                        <span class="tag">indexOf()</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/instance/">
+                        <span class="tag">instance</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/javascript/">
+                        <span class="tag">javascript</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/job-interview-question/">
+                        <span class="tag">job interview question</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/new/">
+                        <span class="tag">new</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/node/">
+                        <span class="tag">node</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/object/">
+                        <span class="tag">object</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/prototype/">
+                        <span class="tag">prototype</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/slice/">
+                        <span class="tag">slice()</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/splice/">
+                        <span class="tag">splice()</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/this/">
+                        <span class="tag">this</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%EC%98%A4%EB%8B%B5%EB%85%B8%ED%8A%B8/">
+                        <span class="tag">오답노트</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="this keyword" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Doyi Kim&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/letsdoyi">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'http://yoursite.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
