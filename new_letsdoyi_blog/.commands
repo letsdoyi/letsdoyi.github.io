@@ -1,0 +1,5 @@
+# new post, draft
+npm run hexo new [layout] <title>
+
+# start (with draft)
+npm run server
