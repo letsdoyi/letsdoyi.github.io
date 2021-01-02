@@ -137,6 +137,66 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2021-01-02T17:19:21.000Z">2021-01-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Playground/">Playground</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 267 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2021/01/03/manage-hexo-with-git/">Hexo 블로그 깃헙과 연결하고 관리하기</a>
+            
+        </h1>
+        <div class="content">
+            <p>Hexo 블로그를 깃헙에 연결하고 관리하는 방법에 대해 정리하려고 합니다.<br>블로그를 연결하고 관리하기 위해서는 2가지 레포지토리가 필요합니다. deploy 하여 깃헙 페이지가 될 레포 하나 와 소스들의 버젼관리를 위한 레포하나가 필요합니다.</p>
+<h2 id="1-deploy-하여-깃헙-페이지가-될-레포-설정"><a href="#1-deploy-하여-깃헙-페이지가-될-레포-설정" class="headerlink" title="1. deploy 하여 깃헙 페이지가 될 레포 설정"></a>1. deploy 하여 깃헙 페이지가 될 레포 설정</h2><ul>
+<li>깃헙 페이지용 레포 만들기 (Page를 이용해야함으로 public)</li>
+<li><code>_config.yml</code> 파일에서 아래 코드를 추가하기</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: https:&#x2F;&#x2F;hexo.io&#x2F;plugins&#x2F;</span><br><span class="line">## Themes: https:&#x2F;&#x2F;hexo.io&#x2F;themes&#x2F;</span><br><span class="line">Plugins:</span><br><span class="line">- hexo-deployer-git</span><br><span class="line">theme: icarus</span><br><span class="line"></span><br><span class="line"># Deployment</span><br><span class="line">## Docs: https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: &#123;깃헙 페이지용 레포 이름&#125;.git</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>hexo-deployer-git</code> 플러그인 설치하기<br>npm install ~</li>
+<li><code>hexo deploy</code> 다음 명령어를 입력하면 블로그가 deploy!</li>
+</ul>
+<h2 id="2-깃헙으로-관리할-레포-설정"><a href="#2-깃헙으로-관리할-레포-설정" class="headerlink" title="2. 깃헙으로 관리할 레포 설정"></a>2. 깃헙으로 관리할 레포 설정</h2><ul>
+<li>깃헙 관리용 레포 만들기</li>
+<li>깃헙 레포를 설정 할때와 동일,<br><code>git remote set-url origin https://github.com/letsdoyi/{블로그 버젼관리용 레포}.git</code></li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2020-03-22T15:41:04.000Z">2020-03-23</time>
                 
                 <div class="level-item">
@@ -202,6 +262,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-02T17:19:21.000Z">2021-01-03</time></div>
+                    <a href="/2021/01/03/manage-hexo-with-git/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo 블로그 깃헙과 연결하고 관리하기</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Playground/">Playground</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-13T10:30:48.112Z">2020-09-13</time></div>
                     <a href="/2020/09/13/why-typescript/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Why Typescript?</a>
                     <p class="is-size-7 is-uppercase">
@@ -250,19 +323,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-29T11:31:14.885Z">2020-08-29</time></div>
-                    <a href="/2020/08/29/circular-progress-bar-implement-2/" class="title has-link-black-ter is-size-6 has-text-weight-normal">SVG로 그림 그리는 효과 구현 - 2탄</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Playground/">Playground</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -296,7 +356,7 @@
                 <span class="level-item">Playground</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Programming/">
@@ -492,7 +552,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/hexo/">
                         <span class="tag">hexo</span>
-                        <span class="tag is-grey">1</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -615,7 +675,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2020 Doyi Kim&nbsp;
+                &copy; 2021 Doyi Kim&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
                 
