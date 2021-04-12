@@ -59,7 +59,15 @@
 <link rel="stylesheet" href="/css/back-to-top.css">
 
     
-    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F3FQKCPD82"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-F3FQKCPD82');
+</script>
+
     
     
     
@@ -119,7 +127,7 @@
         </div>
     </div>
 </nav>
-    
+        
     <section class="section">
         <div class="container">
             <div class="columns">
@@ -244,6 +252,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-15T12:24:18.545Z">2021-02-15</time></div>
+                    <a href="/2021/02/15/class-Javascript-ES6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">기초 - class (Javascript ES6)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Javascript/">Javascript</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-02T17:19:21.000Z">2021-01-03</time></div>
                     <a href="/2021/01/03/manage-hexo-with-git/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo 블로그 깃헙과 연결하고 관리하기</a>
                     <p class="is-size-7 is-uppercase">
@@ -292,19 +313,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-30T01:56:49.782Z">2020-08-30</time></div>
-                    <a href="/2020/08/30/cooperative-learning/" class="title has-link-black-ter is-size-6 has-text-weight-normal">함께 자라기, 애자일로 가는 길 - 김창준</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Books/">Books</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -346,7 +354,7 @@
                 <span class="level-item">Programming</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">12</span>
+                <span class="level-item tag">13</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Programming/DOM/">
@@ -370,7 +378,7 @@
                 <span class="level-item">Javascript</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">9</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Programming/Paradigm/">
@@ -661,6 +669,9 @@
                 Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
                 
+                <br>
+                <span id="visits">visits: <font class="count">--<font></span>
+                <span id="pageviews">pageviews: <font class="count">--<font></span>
                 </p>
             </div>
             <div class="level-end">
@@ -679,7 +690,10 @@
             
             </div>
         </div>
-    </div>
+
+
+    
+  </div>
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
@@ -780,6 +794,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <script src="/js/main.js" defer></script>
 
+
     
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
@@ -811,5 +826,44 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase.js"></script>
+    <script>
+      $(function () {
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyAVNn2LHf_Ultn-Te5GG9Sav0XFfeliBTs",
+          authDomain: "hexo-blog-letsdoyi-60315.firebaseapp.com",
+          databaseURL: "https://hexo-blog-letsdoyi-60315-default-rtdb.firebaseio.com",
+          projectId: "hexo-blog-letsdoyi-60315",
+          storageBucket: "hexo-blog-letsdoyi-60315.appspot.com",
+          messagingSenderId: "542058316814",
+          appId: "1:542058316814:web:5d9295e0de92b10209685f",
+          measurementId: "G-Y83T0GE0BZ",
+        };
+        let init = firebase.initializeApp(config);
+        var database = firebase.database();
+        var oriUrl = window.location.host;
+        var curUrl = oriUrl + window.location.pathname;
+        function readVisits(url, selector) {
+          var db_key = decodeURI(url.replace(new RegExp("\\/|\\.", "g"), "_"));
+          database
+            .ref(db_key)
+            .once("value")
+            .then(function (result) {
+              var count = parseInt(result.val() || 0) + 1;
+              database.ref(db_key).set(count);
+              if (selector.length > 0) {
+                selector.html(count);
+              }
+            });
+        }
+        readVisits(oriUrl, $("#visits .count"));
+
+        if (curUrl && curUrl != "_") {
+          readVisits("page/" + curUrl, $("#pageviews .count"));
+        }
+      });
+    </script>
 </body>
 </html>

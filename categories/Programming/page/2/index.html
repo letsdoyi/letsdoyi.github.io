@@ -55,7 +55,15 @@
 <link rel="stylesheet" href="/css/back-to-top.css">
 
     
-    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F3FQKCPD82"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-F3FQKCPD82');
+</script>
+
     
     
     
@@ -115,7 +123,7 @@
         </div>
     </div>
 </nav>
-    
+        
     <section class="section">
         <div class="container">
             <div class="columns">
@@ -130,6 +138,68 @@
         </nav>
     </div>
 </div>
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-05-27T12:18:13.000Z">2019-05-27</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Programming/">Programming</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Programming/Javascript/">Javascript</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 408 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/05/27/Object-Constructor/">Object Constructor - 생성자로 객체 만들기</a>
+            
+        </h1>
+        <div class="content">
+            <p>객체 생성자(Object Constructor)는 <strong>비슷한 객체를 무수히</strong> 만들어낼 수 있다.</p>
+<p><em>cf. 객체 리터럴로 객체를 생성할 수도 있다. var dog = { name: ‘메시’, breed:’푸들’, weight: ‘6kg’}</em></p>
+<h2 id="객체-생성자-만들기"><a href="#객체-생성자-만들기" class="headerlink" title="객체 생성자 만들기"></a>객체 생성자 만들기</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params">name, breed, weight</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//객체 생성자 특징 1. a function, 2.name with Upper Case</span></span><br><span class="line">  <span class="keyword">this</span>.name = name; <span class="comment">//3. 'this' Keywords</span></span><br><span class="line">  <span class="keyword">this</span>.breed = breed;</span><br><span class="line">  <span class="keyword">this</span>.weight = weight;</span><br><span class="line">  <span class="comment">//4. return nothing</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="객체-생성자-특징"><a href="#객체-생성자-특징" class="headerlink" title="객체 생성자 특징"></a>객체 생성자 특징</h2><ol>
+<li>객체 생성자는 함수이다.</li>
+<li>생성자 함수명은 일반적으로 대문자로 시작한다.</li>
+<li><code>this</code> 키워드를 사용한다.</li>
+<li>생성자 함수는 아무것도 반환하지 않는다.</li>
+</ol>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/05/27/Object-Constructor/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
 
     
 <div class="card">
@@ -285,6 +355,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-15T12:24:18.545Z">2021-02-15</time></div>
+                    <a href="/2021/02/15/class-Javascript-ES6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">기초 - class (Javascript ES6)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Programming/">Programming</a> / <a class="has-link-grey -link" href="/categories/Programming/Javascript/">Javascript</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-02T17:19:21.000Z">2021-01-03</time></div>
                     <a href="/2021/01/03/manage-hexo-with-git/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hexo 블로그 깃헙과 연결하고 관리하기</a>
                     <p class="is-size-7 is-uppercase">
@@ -333,19 +416,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-08-30T01:56:49.782Z">2020-08-30</time></div>
-                    <a href="/2020/08/30/cooperative-learning/" class="title has-link-black-ter is-size-6 has-text-weight-normal">함께 자라기, 애자일로 가는 길 - 김창준</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Books/">Books</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -387,7 +457,7 @@
                 <span class="level-item">Programming</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">12</span>
+                <span class="level-item tag">13</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Programming/DOM/">
@@ -411,7 +481,7 @@
                 <span class="level-item">Javascript</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">9</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Programming/Paradigm/">
@@ -702,6 +772,9 @@
                 Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
                 
+                <br>
+                <span id="visits">visits: <font class="count">--<font></span>
+                <span id="pageviews">pageviews: <font class="count">--<font></span>
                 </p>
             </div>
             <div class="level-end">
@@ -720,7 +793,10 @@
             
             </div>
         </div>
-    </div>
+
+
+    
+  </div>
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
@@ -821,6 +897,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <script src="/js/main.js" defer></script>
 
+
     
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
@@ -852,5 +929,44 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+
+    <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase.js"></script>
+    <script>
+      $(function () {
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyAVNn2LHf_Ultn-Te5GG9Sav0XFfeliBTs",
+          authDomain: "hexo-blog-letsdoyi-60315.firebaseapp.com",
+          databaseURL: "https://hexo-blog-letsdoyi-60315-default-rtdb.firebaseio.com",
+          projectId: "hexo-blog-letsdoyi-60315",
+          storageBucket: "hexo-blog-letsdoyi-60315.appspot.com",
+          messagingSenderId: "542058316814",
+          appId: "1:542058316814:web:5d9295e0de92b10209685f",
+          measurementId: "G-Y83T0GE0BZ",
+        };
+        let init = firebase.initializeApp(config);
+        var database = firebase.database();
+        var oriUrl = window.location.host;
+        var curUrl = oriUrl + window.location.pathname;
+        function readVisits(url, selector) {
+          var db_key = decodeURI(url.replace(new RegExp("\\/|\\.", "g"), "_"));
+          database
+            .ref(db_key)
+            .once("value")
+            .then(function (result) {
+              var count = parseInt(result.val() || 0) + 1;
+              database.ref(db_key).set(count);
+              if (selector.length > 0) {
+                selector.html(count);
+              }
+            });
+        }
+        readVisits(oriUrl, $("#visits .count"));
+
+        if (curUrl && curUrl != "_") {
+          readVisits("page/" + curUrl, $("#pageviews .count"));
+        }
+      });
+    </script>
 </body>
 </html>
